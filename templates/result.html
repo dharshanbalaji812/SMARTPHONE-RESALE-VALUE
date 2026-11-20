@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resale Estimate | ReSellAI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">ReSell<span>AI</span></a>
+    <span class="top-note">Your estimated resale value</span>
+  </header>
+  <main class="container result-container">
+    <section class="result-card">
+      <div class="success-icon">✓</div>
+      <p class="eyebrow">PREDICTION COMPLETE</p>
+      <h1>Estimated resale value</h1>
+      <div class="price">₹{{ "{:,.0f}".format(price) }}</div>
+      <p class="result-subtitle">Estimated value for your {{ brand }} smartphone</p>
+      <div class="stats">
+        <div><span>Original price</span><strong>₹{{ "{:,.0f}".format(original_price) }}</strong></div>
+        <div><span>Estimated retained value</span><strong>{{ percentage }}%</strong></div>
+        <div><span>Phone condition</span><strong>{{ condition }}</strong></div>
+      </div>
+      <a class="button-link" href="/">Predict another phone <span>→</span></a>
+      <p class="disclaimer">This is an ML-generated estimate based on the included demo dataset. Actual resale offers vary by model, location, demand and device inspection.</p>
+    </section>
+  </main>
+</body>
+</html>

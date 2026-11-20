@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smartphone Resale Value Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">ReSell<span>AI</span></a>
+    <span class="top-note">Smartphone price estimator</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">SMARTPHONE RESALE VALUE DETECTION</p>
+      <h1>Find out what your phone<br><span>could be worth.</span></h1>
+      <p class="intro">Enter your smartphone details to get an estimated second-hand resale price.</p>
+    </section>
+
+    <section class="form-card">
+      <div class="card-heading">
+        <div>
+          <h2>Phone details</h2>
+          <p>Fill in the specifications below.</p>
+        </div>
+        <div class="phone-icon">▣</div>
+      </div>
+
+      {% if error %}
+        <div class="error">{{ error }}</div>
+      {% endif %}
+
+      <form action="/predict" method="POST">
+        <div class="form-grid">
+          <label>Brand
+            <select name="brand" required>
+              <option value="Apple">Apple</option>
+              <option value="Samsung">Samsung</option>
+              <option value="OnePlus">OnePlus</option>
+              <option value="Xiaomi">Xiaomi</option>
+              <option value="Vivo">Vivo</option>
+              <option value="Oppo">Oppo</option>
+              <option value="Realme">Realme</option>
+              <option value="Google">Google</option>
+            </select>
+          </label>
+
+          <label>Phone age (years)
+            <input type="number" name="age_years" min="0" max="15" step="0.1" placeholder="e.g. 2.5" required>
+          </label>
+
+          <label>Original purchase price (₹)
+            <input type="number" name="original_price" min="1000" max="1000000" placeholder="e.g. 45000" required>
+          </label>
+
+          <label>RAM
+            <select name="ram_gb" required>
+              <option value="2">2 GB</option><option value="3">3 GB</option>
+              <option value="4">4 GB</option><option value="6">6 GB</option>
+              <option value="8" selected>8 GB</option><option value="12">12 GB</option>
+              <option value="16">16 GB</option>
+            </select>
+          </label>
+
+          <label>Storage
+            <select name="storage_gb" required>
+              <option value="32">32 GB</option><option value="64">64 GB</option>
+              <option value="128" selected>128 GB</option><option value="256">256 GB</option>
+              <option value="512">512 GB</option><option value="1024">1 TB</option>
+            </select>
+          </label>
+
+          <label>Battery health (%)
+            <input type="number" name="battery_health" min="1" max="100" placeholder="e.g. 88" required>
+          </label>
+
+          <label>Physical condition
+            <select name="condition" required>
+              <option value="Excellent">Excellent</option>
+              <option value="Good" selected>Good</option>
+              <option value="Fair">Fair</option>
+              <option value="Poor">Poor</option>
+            </select>
+          </label>
+
+          <label>Remaining warranty (months)
+            <input type="number" name="warranty_months" min="0" max="60" value="0" required>
+          </label>
+        </div>
+        <button type="submit">Predict resale value <span>→</span></button>
+      </form>
+      <p class="privacy-note">Your entered details are used only to calculate this estimate.</p>
+    </section>
+
+    <p class="disclaimer">Demo project: predictions are estimates, not guaranteed market offers. Accuracy depends on the quality and representativeness of the training data.</p>
+  </main>
+</body>
+</html>
